@@ -1,0 +1,42 @@
+#Song:
+#formats;3gp, aac, flv, m4a, mp3, mp4, ogg, wav, webm
+youtube-dl -f bestaudio --output "/home/datos/Music/%(artist)s-%(track)s.%(ext)s" --extract-audio --audio-format vorbis https://www.youtube.com/watch\?v\=-ukxpEho0Iw
+
+youtube-dl -f bestaudio --output "/home/datos/Music/%(artist)s-%(track)s.%(ext)s" --extract-audio --audio-format vorbis https://www.youtube.com/watch\?v\=-ukxpEho0Iw --restrict-filenames
+
+
+#Video:
+youtube-dl -f "bestvideo $calidad/[ext=mp4]+bestaudio[ext=m4a]/best" --output "/home/datos/Videos/$nombre" $link
+nombre=$(youtube-dl --get-filename -o "%(title)s.%(ext)s" $link --restrict-filenames)
+
+--write-auto-sub    
+
+
+#PlayList songs:
+youtube-dl -f bestaudio --output "/home/datos/Music/PlayLists/%(playlist)s/%(playlist_index)s-%(artist)s.%(track)s.%(ext)s" --extract-audio --audio-format vorbis https://www.youtube.com/watch\?v\=3BTBdZ-lFAI\&list\=PLFAC3C25503995EE
+
+home/datos/Music/listacanciones.txt
+
+
+# Download YouTube playlist videos in separate directory indexed by video order in a playlist
+$ youtube-dl -o '%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s' https://www.youtube.com/playlist?list=PLwiyx1dc3P2JR9N8gQaQN_BCvlSlap7re
+
+
+#udemy
+1. Get link to the course to download. e.g. https://www.udemy.com/course-name/
+2. Login into udemy website, save the cookie from chrome using Chrome (Cookie.txt)1 export extension. Save it to file udemy-cookies.txt
+3. Get the link of the video that you want to download. usually in format. Use the command provided below where you have to replace the {course_link} and {path_to_cookies_file} with respective paths.
+
+Example:
+youtube-dl --cookies ./udemy-cookies.txt -o '%(playlist)s/%(chapter_number)s - %(chapter)s/%(playlist_index)s. %(title)s.%(ext)s' https://www.udemy.com/course/web-projects-with-vanilla-javascript
+
+
+
+Extractors:
+youtube-dl --list-extractors
+
+
+Facebook:
+ youtube-dl -f "bestvideo mp4/[ext=mp4]+bestaudio[ext=m4a]/best" --output "/home/datos/Videos/prueba" https://www.facebook.com/mendelson.dias/videos/3419402528073123/
+
+
