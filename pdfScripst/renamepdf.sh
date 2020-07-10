@@ -43,7 +43,9 @@ for i in *.txt;
 do
      echo "$i";
      #nombre=$(awk 'BEGIN{FS="\n"; RS=""} {print $1"-"$2}' "$i" | sed -n 1p | sed 's/ //g')
-     nombre=$(awk 'BEGIN{FS="\n"; RS=""} {print $1$2}' "$i" | sed -n 1p | sed 's/^[ \t]*//;s/[ \t]*$//' | sed 's/\s/_/g' | sed 's/__________________/-/g')
+     nombreini=$(awk 'BEGIN{FS="\n"; RS=""} {print $1$2$3}' "$i" | sed -n 1p | sed 's/^[ \t]*//;s/[ \t]*$//' | sed 's/\s/_/g' | sed 's/__________________/-/g')
+     cargo=$(awk 'BEGIN{FS="\n"; RS=""} {print $1}' "$i" | sed -n 2p | sed 's/^[ \t]*//;s/[ \t]*$//' | sed 's/\s/_/g')
+     nombre=$nombreini"__"$cargo
      echo $nombre;
      FICHERO=$i;
      mv "${FICHERO%.*}.pdf" "$nombre.pdf"
