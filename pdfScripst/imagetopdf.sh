@@ -55,7 +55,7 @@ nomb=1
 for i in *.txt;
 do
      echo "$i";
-     nombre=$(awk 'BEGIN{FS="\n"; RS="CERTIFICA"} {print $2 $3 $4}' "$i" | sed -n 2p | sed 's/*x//g' | sed 's/ /_/g')
+     nombre=$(awk 'BEGIN{FS="\n"; RS="CERTIFICA"} {print $2$3"_"$4"_"$6$7}' "$i" | sed -n 2p | sed 's/^[ \t]*//;s/[ \t]*$//' | sed 's/*x//g' | sed 's/ /_/g' | sed 's/ASISTIÓ_Y_APROBÓ_EL_CURSO_DE//g'| sed 's/ASISTIÓ_Y_APROBÓ//g') 
      echo $nombre;
      mv "$i" "$nombre.txt";
      FICHERO=$i;
