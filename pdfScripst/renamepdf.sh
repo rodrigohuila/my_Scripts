@@ -42,7 +42,8 @@ done;
 for i in *.txt;
 do
      echo "$i";
-     nombre=$(awk 'BEGIN{FS="\n"; RS=""} {print $1"-"$2}' "$i" | sed -n 1p | sed 's/ //g')
+     #nombre=$(awk 'BEGIN{FS="\n"; RS=""} {print $1"-"$2}' "$i" | sed -n 1p | sed 's/ //g')
+     nombre=$(awk 'BEGIN{FS="\n"; RS=""} {print $1$2}' "$i" | sed -n 1p | sed 's/^[ \t]*//;s/[ \t]*$//' | sed 's/\s/_/g' | sed 's/__________________/-/g')
      echo $nombre;
      FICHERO=$i;
      mv "${FICHERO%.*}.pdf" "$nombre.pdf"
@@ -51,18 +52,7 @@ do
 done;
 
 
-#Arreglo de Cadenas
-    # echo $echo "Arreglo de Cadenas:${arregloNombres[*]}"
-
-#Renombrar PDFS     
-#for i in *.pdf
-#do
-#     mv "$i" "${arregloNombres[n]}.PDF";
-#     echo "${arregloNombres[n]}.PDF";
-#     ((n++))
-#done;
-#echo $n;
-
+#Contar archivos pdf
 contar=$(find -name "*.pdf" | wc -l)
 
 ##Eliminar TXT
@@ -70,7 +60,6 @@ rm *.txt
 
 #Comprimir PDFS
 zip $dirdestino.zip *.pdf
-
 
 ##Eliminar PDF
 rm *.pdf
