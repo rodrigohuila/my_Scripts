@@ -4,6 +4,7 @@
 
 opcion=0
 
+
 #Función para instalar postgres
 instalar_postgres () {
 echo -e "\n Verificar instalación postgres..."

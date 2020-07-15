@@ -23,13 +23,14 @@ read -p "Digíte el directorio donde se encuentran los PDF: home/datos/Downloads
 cd ~/Downloads/$dirdestino
 
 
-#Ir de PDF Scaneado en PDF Scaneado y cambiarles el nombre a números ordenados
+#Ir de PDF Scaneado en PDF Scaneado y cambiarles el nombre a números ordenados (1-2-3...)
 for  i in *.pdf;
 do
      mv "$i" "$nomb.pdf";
      #echo $i;
      ((nomb++))
 done;
+
 
 nomb=1
 #Ir de PDF Scaneado en PDF Scaneado y convertirlo a Imagen JPG
@@ -51,11 +52,15 @@ done;
 
 
 nomb=1
-#Ir de TXT en TXT y conseguir los datos del documento y cambiar nombre de PDF
+#Ir de TXT en TXT y conseguir los datos del documento y cambiar nombre de PDF(S)
 for i in *.txt;
 do
      echo "$i";
-     nombre=$(awk 'BEGIN{FS="\n"; RS="CERTIFICA"} {print $2$3"_"$4"_"$6$7}' "$i" | sed -n 2p | sed 's/^[ \t]*//;s/[ \t]*$//' | sed 's/*x//g' | sed 's/ /_/g' | sed 's/ASISTIÓ_Y_APROBÓ_EL_CURSO_DE//g'| sed 's/ASISTIÓ_Y_APROBÓ//g') 
+     nombre=$(awk 'BEGIN{FS="\n"; RS="CERTIFICA"} {print $2$3"_"$4"_"$6$7}' "$i" | sed -n 2p | sed 's/^[ \t]*//;s/[ \t]*$//' | sed 's/*x//g' | sed 's/ /_/g' | sed 's/ASISTIÓ_Y_APROBÓ_EL_CURSO_DE//g'| sed 's/ASISTIÓ_Y_APROBÓ//g' |sed 'y/./*/' | sed 's/*//g')
+     #Reemplazar caracteres bandera y:
+     #sed 'y/./*/' | sed 's/*//g
+     #Reemplazar letras:
+     #sed 's/*//g
      echo $nombre;
      mv "$i" "$nombre.txt";
      FICHERO=$i;
@@ -63,7 +68,6 @@ do
      arregloNombres=("${arregloNombres[@]}" $nombre)
      echo "${FICHERO%.*}";
 done;
-
 
 
 #Mostar información recolectada en el arreglo de Nombres
